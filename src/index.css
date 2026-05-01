@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Axiom Design System — Professional Trading Platform
+   Inspired by TradingView / Robinhood / Webull. Dark, polished, high-contrast.
+   All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Core surfaces */
+    --background: 213 22% 6%;        /* #0B0E11 */
+    --foreground: 222 19% 92%;       /* #E6E9EF */
+
+    --card: 220 22% 12%;             /* #151924 */
+    --card-foreground: 222 19% 92%;
+
+    --popover: 213 22% 11%;          /* #151A21 */
+    --popover-foreground: 222 19% 92%;
+
+    --surface: 213 22% 11%;          /* elevated */
+    --surface-2: 215 21% 14%;
+
+    /* Brand accent — Emerald (Axiom signature) */
+    --primary: 122 100% 39%;         /* #00C805 */
+    --primary-foreground: 0 0% 0%;
+    --primary-glow: 122 100% 50%;
+
+    --secondary: 215 21% 16%;        /* #1F2630 */
+    --secondary-foreground: 222 19% 92%;
+
+    --muted: 215 21% 14%;
+    --muted-foreground: 219 14% 60%; /* #8B95A7 */
+
+    --accent: 215 21% 18%;
+    --accent-foreground: 222 19% 92%;
+
+    /* Market semantics */
+    --gain: 122 100% 39%;            /* #00C805 emerald */
+    --gain-foreground: 0 0% 100%;
+    --loss: 3 100% 59%;              /* #FF3B30 crimson */
+    --loss-foreground: 0 0% 100%;
+    --warning: 38 100% 55%;
+
+    --destructive: 3 100% 59%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 21% 16%;
+    --input: 215 21% 16%;
+    --ring: 122 100% 39%;
+
+    --radius: 0rem;
+
+    /* Gradients */
+    --gradient-hero: radial-gradient(ellipse at top, hsl(122 100% 39% / 0.18), transparent 60%), linear-gradient(180deg, hsl(213 22% 6%) 0%, hsl(213 22% 4%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(122 100% 39%), hsl(122 100% 50%));
+    --gradient-gain: linear-gradient(180deg, hsl(122 100% 39% / 0.18), hsl(122 100% 39% / 0));
+    --gradient-loss: linear-gradient(180deg, hsl(3 100% 59% / 0.18), hsl(3 100% 59% / 0));
+    --gradient-card: linear-gradient(180deg, hsl(220 22% 14%), hsl(220 22% 12%));
+
+    /* Shadows */
+    --shadow-elev: 0 8px 24px -8px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 32px hsl(122 100% 39% / 0.35);
+
+    /* Sidebar */
+    --sidebar-background: 220 22% 9%;
+    --sidebar-foreground: 222 19% 88%;
+    --sidebar-primary: 122 100% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 21% 14%;
+    --sidebar-accent-foreground: 222 19% 92%;
+    --sidebar-border: 215 21% 14%;
+    --sidebar-ring: 122 100% 39%;
+  }
+
+  /* Force dark — Axiom is dark-only */
+  html {
+    color-scheme: dark;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body, #root {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  .font-mono, .tabular {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.4);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.5); }
+}
+
+/* Sharp-corner enforcement — Axiom is geometric, no rounded edges */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-radius: 0 !important;
+  }
+}
+
+/* Hairline borders — every button, card, and input gets a thin outline */
+@layer base {
+  button,
+  [role="button"],
+  .card,
+  [data-card],
+  input,
+  textarea,
+  select {
+    border-width: 1px;
+    border-style: solid;
+    border-color: hsl(var(--border) / 0.7);
+  }
+}
+
+/* Homepage paper-unfold animation */
+@layer utilities {
+  @keyframes paper-unfold {
+    0%   { transform: scale(0.18) rotate(-14deg); filter: blur(2px); opacity: 0; }
+    35%  { transform: scale(0.55) rotate(-6deg);  filter: blur(1px); opacity: 1; }
+    70%  { transform: scale(0.92) rotate(-1deg);  filter: blur(0);   opacity: 1; }
+    100% { transform: scale(1)    rotate(0);      filter: blur(0);   opacity: 1; }
+  }
+  @keyframes paper-crinkle {
+    0%, 100% { transform: translate(0,0) rotate(0); }
+    25%      { transform: translate(-1px,1px) rotate(-0.4deg); }
+    50%      { transform: translate(1px,-1px) rotate(0.4deg); }
+    75%      { transform: translate(-1px,-1px) rotate(-0.2deg); }
+  }
+  .animate-paper-unfold {
+    animation: paper-unfold 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: center;
+  }
+  .animate-paper-crinkle {
+    animation: paper-crinkle 0.4s ease-in-out 3;
+  }
+  .paper-texture {
+    background-image:
+      radial-gradient(circle at 30% 20%, hsl(0 0% 100% / 0.04) 0, transparent 40%),
+      radial-gradient(circle at 70% 60%, hsl(0 0% 100% / 0.03) 0, transparent 50%),
+      linear-gradient(135deg, hsl(220 22% 14%), hsl(220 22% 10%));
+  }
+}
+
+@layer utilities {
+  .text-gain { color: hsl(var(--gain)); }
+  .text-loss { color: hsl(var(--loss)); }
+  .bg-gain { background-color: hsl(var(--gain)); }
+  .bg-loss { background-color: hsl(var(--loss)); }
+  .bg-gain-soft { background-color: hsl(var(--gain) / 0.12); }
+  .bg-loss-soft { background-color: hsl(var(--loss) / 0.12); }
+  .border-gain { border-color: hsl(var(--gain) / 0.4); }
+  .border-loss { border-color: hsl(var(--loss) / 0.4); }
+  .gradient-hero { background: var(--gradient-hero); }
+  .gradient-primary { background: var(--gradient-primary); }
+  .gradient-card { background: var(--gradient-card); }
+  .shadow-elev { box-shadow: var(--shadow-elev); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+}
+
+/* Spotlight onboarding */
+.spotlight-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: auto;
+}
+.spotlight-target {
+  position: relative;
+  z-index: 90;
+  box-shadow: 0 0 0 2px hsl(var(--primary)), 0 0 0 9999px hsl(0 0% 0% / 0.78);
+  transition: box-shadow 0.25s ease;
+}
