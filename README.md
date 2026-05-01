@@ -10,3 +10,6 @@ First-Principles Approach: All financial concepts are distilled into their pures
 We have went forward with a minimalist UI Design which is terminal-themed, offering a low-latency interface for extensive "lock-in" learning sessions. The website has been constructed with an emphasis on web architecture and execution, mirroring the shift in the user towards technical expertise.
 
 The project is still not done with, and is still being developed. Find any errors? Reach out to us through email. We will keep you updated.
+
+Lakshith: lakshithchauhan@gmail.com
+Karteekeya: karteekeyaareddy@gmail.com
